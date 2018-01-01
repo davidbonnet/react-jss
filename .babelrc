@@ -1,9 +1,5 @@
 {
-  "presets": ["es2015", "react", "stage-0"],
-  "plugins": [
-    "transform-es3-member-expression-literals",
-    "transform-es3-property-literals"
-  ],
+  "presets": ["env", "react", "stage-0"],
   "env": {
     "test": {
       "plugins": [
