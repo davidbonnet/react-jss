@@ -6,6 +6,8 @@ import getDisplayName from './getDisplayName'
 import * as ns from './ns'
 import contextTypes from './contextTypes'
 
+const env = process.env.NODE_ENV
+
 // Like a Symbol
 const dynamicStylesNs = Math.random()
 
@@ -64,7 +66,7 @@ export default (stylesOrCreator, InnerComponent, options = {}) => {
   const injectMap = inject ? toMap(inject) : defaultInjectProps
   const {themeListener} = theming
   const displayName = getDisplayName(InnerComponent)
-  const defaultClassNamePrefix = `${displayName}-`
+  const defaultClassNamePrefix = env === 'production' ? undefined : `${displayName}-`
   const noTheme = {}
   const managerId = managersCounter++
   const manager = new SheetsManager()
