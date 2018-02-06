@@ -1,3 +1,7 @@
+## 8.2.1 / 2018-01-03
+
+- Production mode for defaultClassNamePrefix (#191).
+
 ## 8.2.0 / 2017-12-19
 
 - Upgrade theming

@@ -1,6 +1,6 @@
 {
   "name": "react-jss",
-  "version": "8.2.0",
+  "version": "8.2.1",
   "description": "JSS integration with React",
   "main": "lib/index.js",
   "engines": {
@@ -53,6 +53,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-plugin-transform-es3-member-expression-literals": "^6.8.0",
     "babel-plugin-transform-es3-property-literals": "^6.8.0",
+    "babel-plugin-rewire": "^1.1.0",
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "^6.24.1",
     "common-tags": "^1.4.0",

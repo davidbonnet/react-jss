@@ -12,7 +12,8 @@
             "tests.webpack.js",
             "**/*.test.js"
           ]
-        }]
+        }],
+        "rewire"
       ]
     }
   }

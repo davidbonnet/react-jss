@@ -1,9 +1,10 @@
-/* eslint-disable global-require, react/prop-types */
+/* eslint-disable global-require, react/prop-types, no-underscore-dangle */
 
 import expect from 'expect.js'
 import React from 'react'
 import {create} from 'jss'
 import getDisplayName from './getDisplayName'
+import createHoc from './createHoc'
 import {createGenerateClassName} from '../tests/helper'
 
 describe('injectSheet', () => {
@@ -274,6 +275,40 @@ describe('injectSheet', () => {
       }, {jss})(InnerComponent)
       render(<MyComponent classes={{user: 'user'}} />, node)
       expect(classes).to.eql({default: 'default', a: 'a-id', user: 'user'})
+    })
+  })
+
+  describe('classNamePrefix', () => {
+    let classNamePrefix
+
+    const renderTest = () => {
+      const localJss = create({
+        createGenerateClassName: () => (rule, sheet) => {
+          classNamePrefix = sheet.options.classNamePrefix
+          return `${rule.key}-id`
+        }
+      })
+      function DisplayNameTest() {
+        return null
+      }
+      const MyComponent = injectSheet({
+        a: {color: 'red'}
+      }, {jss: localJss})(DisplayNameTest)
+      render(<MyComponent />, node)
+    }
+
+    it('should pass displayName as prefix', () => {
+      renderTest()
+      expect(classNamePrefix).to.be('DisplayNameTest-')
+    })
+
+    it.skip('should pass no prefix in production', () => {
+      // Rewrire currently doesn't work, most probably because of how we rest
+      // the tests #118
+      createHoc.__Rewire__('env', 'production')
+      renderTest()
+      expect(classNamePrefix).to.be(undefined)
+      createHoc.__ResetDependency__('env')
     })
   })
 })
